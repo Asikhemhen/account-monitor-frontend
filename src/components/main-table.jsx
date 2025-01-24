@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 
 const MainTable = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]); // Initialize as an empty array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://account-monitor-production.up.railway.app/api/accounts"
-        );
+        const response = await fetch("/api/account_info");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const result = await response.json();
-        setData(result.tradingData);
+        console.log(result); // Log the response to inspect it
+        setData(result); // Directly set `result` as `data`
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -92,57 +91,65 @@ const MainTable = () => {
 
           {/* Table Body */}
           <tbody>
-            {data.map((row, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-stone-100" : "bg-white"
-                } hover:bg-blue-50`}
-              >
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.account_number}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.account_name}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.balance}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.equity}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.drawdown}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.total_withdraw}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.total_profit_daily}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.total_profit_weekly}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.total_profit_monthly}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.current_pnL}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.current_open_orders}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.current_open_lots}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.last_position_time}
-                </td>
-                <td className="text-left min-w-52 px-4 py-2 border-y">
-                  {row.current_month_profit}
+            {data.length > 0 ? (
+              data.map((row, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-stone-100" : "bg-white"
+                  } hover:bg-blue-50`}
+                >
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.account_number}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.account_name}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.balance}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.equity}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.drawdown}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.total_withdraw}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.total_profit_daily}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.total_profit_weekly}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.total_profit_monthly}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.current_pnL}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.current_open_orders}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.current_open_lots}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.last_position_time}
+                  </td>
+                  <td className="text-left min-w-52 px-4 py-2 border-y">
+                    {row.monthly_profit}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="13" className="text-center py-4">
+                  No data available
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

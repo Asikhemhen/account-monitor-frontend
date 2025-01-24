@@ -42,8 +42,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://AsikhemhenAsikhemhen/account-monitor-frontend",
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
-  }
+  "homepage": "https://Asikhemhen.github.io/account-monitor-frontend",
+  "proxy": "https://account-monitor-production.up.railway.app"
 }
