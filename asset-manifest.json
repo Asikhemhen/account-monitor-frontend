@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/account-monitor-frontend/static/css/main.3957cb96.css",
+    "main.js": "/account-monitor-frontend/static/js/main.74a7f63c.js",
+    "static/js/488.e75445ad.chunk.js": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js",
+    "static/media/logo.jpg": "/account-monitor-frontend/static/media/logo.adb10e5f2a971e4148bc.jpg",
+    "static/media/graph-flat.svg": "/account-monitor-frontend/static/media/graph-flat.4dff3b4951b01c0d36c2365aebb059c2.svg",
+    "static/media/settings.svg": "/account-monitor-frontend/static/media/settings.afc4feb94e876c8c8a1ff3adbd8d2a36.svg",
+    "static/media/accounts.svg": "/account-monitor-frontend/static/media/accounts.6939ccc902c38d6f3161d8caf1cf1d88.svg",
+    "static/media/trophy.svg": "/account-monitor-frontend/static/media/trophy.0e30ecb9d5c4cb10b1236d85d318fb9b.svg",
+    "static/media/cash.svg": "/account-monitor-frontend/static/media/cash.a1ea4790e6ca1efa296ecf86b1586f19.svg",
+    "static/media/add-user.svg": "/account-monitor-frontend/static/media/add-user.26ef72dc8c401fc2a50b0fb4ea528c75.svg",
+    "static/media/coins.svg": "/account-monitor-frontend/static/media/coins.e65f86f286d04bc7333fd71cafa83141.svg",
+    "index.html": "/account-monitor-frontend/index.html",
+    "static/media/equity.svg": "/account-monitor-frontend/static/media/equity.0d76144db35b585dc4e709e818b24f3f.svg",
+    "static/media/graph-up.svg": "/account-monitor-frontend/static/media/graph-up.3f1ac335c7defbfb09db16e95cbc2916.svg",
+    "static/media/line.svg": "/account-monitor-frontend/static/media/line.756be39548fb01c9c83f0b864e1372b0.svg",
+    "static/media/home.svg": "/account-monitor-frontend/static/media/home.bc8b3538bd0b98c7c630f7f7f63ec98c.svg",
+    "static/media/sign-out.svg": "/account-monitor-frontend/static/media/sign-out.dd67feba907391aa7f3ef70c96105e46.svg",
+    "main.3957cb96.css.map": "/account-monitor-frontend/static/css/main.3957cb96.css.map",
+    "main.74a7f63c.js.map": "/account-monitor-frontend/static/js/main.74a7f63c.js.map",
+    "488.e75445ad.chunk.js.map": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3957cb96.css",
+    "static/js/main.74a7f63c.js"
+  ]
+}
