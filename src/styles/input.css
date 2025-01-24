@@ -1,0 +1,16 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar for WebKit browsers */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Hides scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
