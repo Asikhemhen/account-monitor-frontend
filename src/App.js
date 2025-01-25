@@ -1,18 +1,98 @@
-import React, { Component, useState } from "react";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider, useAuth } from "./AuthContext";
 import "./styles/tailwind.css";
-import Main from "./components/main";
-import NavTop from "./components/nav-top";
-import AccountDetails from "./components/account-details";
-import Footer from "./components/footer";
+import Layout from "./components/layout";
+import AdminDashboard from "./pages/adminDashboard";
+import CustomerDashboard from "./pages/customerDashboard";
+import LoginPage from "./pages/loginPage";
+import AddUserPage from "./pages/addUserPage";
+import UsersPage from "./pages/usersPage";
+import SettingsPage from "./pages/settingsPage";
+
+const ProtectedRoute = ({ children, role }) => {
+  const { isAuthenticated, userRole } = useAuth();
+
+  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (role && userRole !== role) return <Navigate to="/" />;
+  return children;
+};
+
+// Default route component
+const DefaultRoute = () => {
+  const { isAuthenticated, userRole } = useAuth();
+
+  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (userRole === "admin") return <Navigate to="/admin/dashboard" />;
+  if (userRole === "user") return <Navigate to="/customer/dashboard" />;
+  return <Navigate to="/login" />;
+};
 
 const App = () => {
   return (
-    <div>
-      <NavTop />
-      <AccountDetails />
-      {/* <Main /> */}
-      <Footer />
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public Login Route */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Routes with Layout */}
+          <Route element={<Layout />}>
+            {/* Admin Routes */}
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/add-user"
+              element={
+                <ProtectedRoute role="admin">
+                  <AddUserPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute role="admin">
+                  <UsersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/settings"
+              element={
+                <ProtectedRoute role="admin">
+                  <SettingsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Customer Route */}
+            <Route
+              path="/customer/dashboard"
+              element={
+                <ProtectedRoute role="user">
+                  <CustomerDashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          {/* Default Route */}
+          <Route path="/" element={<DefaultRoute />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 
