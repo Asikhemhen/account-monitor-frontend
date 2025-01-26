@@ -15,6 +15,7 @@ import AddUserPage from "./pages/addUserPage";
 import UsersPage from "./pages/usersPage";
 import SettingsPage from "./pages/settingsPage";
 
+// Protected Route to handle role-based access
 const ProtectedRoute = ({ children, role }) => {
   const { isAuthenticated, userRole } = useAuth();
 
@@ -23,9 +24,11 @@ const ProtectedRoute = ({ children, role }) => {
   return children;
 };
 
-// Default route component
+// Default Route component to redirect based on user role
 const DefaultRoute = () => {
   const { isAuthenticated, userRole } = useAuth();
+
+  console.log(userRole, isAuthenticated);
 
   if (!isAuthenticated) return <Navigate to="/login" />;
   if (userRole === "admin") return <Navigate to="/admin/dashboard" />;

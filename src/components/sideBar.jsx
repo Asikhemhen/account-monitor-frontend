@@ -5,12 +5,17 @@ import home from "../assets/images/home.svg";
 import settings from "../assets/images/settings.svg";
 import line from "../assets/images/line.svg";
 import { useAuth } from "../AuthContext";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-  const { userRole } = useAuth();
+  const { userRole, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <div className="flex flex-col pt-6 justify-start items-center bg-blue-800 h-full max-w-20 min-w-20 fixed top-20 z-20">
       {userRole === "admin" ? (
@@ -70,15 +75,21 @@ const SideBar = () => {
                   ? "bg-blue-950 rounded-lg"
                   : "bg-transparent"
               }  hover:bg-blue-950 hover:cursor-pointer hover:rounded-lg`}
+              onMouseDown={handleLogout}
             >
               <img src={signout} alt="sign out icon" className="w-full p-3" />
             </div>
           </Link>
         </>
       ) : (
-        <div className="flex w-12 h-12 py-1 hover:bg-blue-950 hover:cursor-pointer hover:rounded-lg">
-          <img src={signout} alt="sign out icon" className="w-full p-3" />
-        </div>
+        <Link to="/login">
+          <div
+            className="flex w-12 h-12 py-1 hover:bg-blue-950 hover:cursor-pointer hover:rounded-lg"
+            onMouseDown={handleLogout}
+          >
+            <img src={signout} alt="sign out icon" className="w-full p-3" />
+          </div>
+        </Link>
       )}
     </div>
   );

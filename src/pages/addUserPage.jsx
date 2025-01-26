@@ -154,7 +154,7 @@ const AddUserPage = () => {
           </div>
           {error && <p className="text-sm text-red-800 py-3">{error}</p>}
           {okay && <p className="text-sm text-green-800 py-3">{okay}</p>}
-          <div>
+          <div className="pt-5">
             <button
               type="submit"
               className="w-full bg-blue-900 text-white p-2 rounded-md hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-offset-2"

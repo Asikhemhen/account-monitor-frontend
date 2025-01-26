@@ -13,7 +13,7 @@ const MainTable = () => {
           throw new Error("Failed to fetch data");
         }
         const result = await response.json();
-        console.log(result); // Log the response to inspect it
+        // console.log(result); // Log the response to inspect it
         setData(result); // Directly set `result` as `data`
         setLoading(false);
       } catch (err) {
