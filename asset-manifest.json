@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/account-monitor-frontend/static/css/main.59f8d3d1.css",
-    "main.js": "/account-monitor-frontend/static/js/main.dac2f954.js",
+    "main.css": "/account-monitor-frontend/static/css/main.e3d3d079.css",
+    "main.js": "/account-monitor-frontend/static/js/main.9423b6d7.js",
     "static/js/488.e75445ad.chunk.js": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js",
-    "static/media/logo.jpg": "/account-monitor-frontend/static/media/logo.adb10e5f2a971e4148bc.jpg",
+    "static/media/logo.png": "/account-monitor-frontend/static/media/logo.b8b50672d15fc786e6d1.png",
     "static/media/graph-flat.svg": "/account-monitor-frontend/static/media/graph-flat.4dff3b4951b01c0d36c2365aebb059c2.svg",
     "static/media/settings.svg": "/account-monitor-frontend/static/media/settings.afc4feb94e876c8c8a1ff3adbd8d2a36.svg",
     "static/media/accounts.svg": "/account-monitor-frontend/static/media/accounts.6939ccc902c38d6f3161d8caf1cf1d88.svg",
@@ -17,12 +17,12 @@
     "static/media/line.svg": "/account-monitor-frontend/static/media/line.756be39548fb01c9c83f0b864e1372b0.svg",
     "static/media/home.svg": "/account-monitor-frontend/static/media/home.bc8b3538bd0b98c7c630f7f7f63ec98c.svg",
     "static/media/sign-out.svg": "/account-monitor-frontend/static/media/sign-out.dd67feba907391aa7f3ef70c96105e46.svg",
-    "main.59f8d3d1.css.map": "/account-monitor-frontend/static/css/main.59f8d3d1.css.map",
-    "main.dac2f954.js.map": "/account-monitor-frontend/static/js/main.dac2f954.js.map",
+    "main.e3d3d079.css.map": "/account-monitor-frontend/static/css/main.e3d3d079.css.map",
+    "main.9423b6d7.js.map": "/account-monitor-frontend/static/js/main.9423b6d7.js.map",
     "488.e75445ad.chunk.js.map": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.59f8d3d1.css",
-    "static/js/main.dac2f954.js"
+    "static/css/main.e3d3d079.css",
+    "static/js/main.9423b6d7.js"
   ]
 }
