@@ -11,6 +11,8 @@ const AddUserPage = () => {
     user_rights: "",
   });
 
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -21,7 +23,7 @@ const AddUserPage = () => {
     const emailLowerCase = formData.email.toLowerCase();
 
     try {
-      const response = await fetch("/api/users", {
+      const response = await fetch(`${BASE_URL}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,11 +6,12 @@ const UsersPage = () => {
   const [error, setError] = useState(null);
   const [actionState, setActionState] = useState("");
   const [bgState, setbgState] = useState("");
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/users");
+        const response = await fetch(`${BASE_URL}/api/users`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -38,7 +39,7 @@ const UsersPage = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const response = await fetch(`/api/users/${email}`, {
+      const response = await fetch(`${BASE_URL}/api/users/${email}`, {
         method: "DELETE",
       });
 
