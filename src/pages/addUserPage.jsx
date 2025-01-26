@@ -46,6 +46,10 @@ const AddUserPage = () => {
         setError("Failed to add user. Please try again.");
         setOkay("");
       }
+      // Reset after 5 seconds
+      setTimeout(() => {
+        setOkay("");
+      }, 5000);
     } catch (error) {
       setError("An error occurred. Please try again.");
     }
