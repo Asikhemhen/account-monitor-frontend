@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/account-monitor-frontend/static/css/main.59f8d3d1.css",
-    "main.js": "/account-monitor-frontend/static/js/main.b0a6525c.js",
+    "main.js": "/account-monitor-frontend/static/js/main.dac2f954.js",
     "static/js/488.e75445ad.chunk.js": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js",
     "static/media/logo.jpg": "/account-monitor-frontend/static/media/logo.adb10e5f2a971e4148bc.jpg",
     "static/media/graph-flat.svg": "/account-monitor-frontend/static/media/graph-flat.4dff3b4951b01c0d36c2365aebb059c2.svg",
@@ -18,11 +18,11 @@
     "static/media/home.svg": "/account-monitor-frontend/static/media/home.bc8b3538bd0b98c7c630f7f7f63ec98c.svg",
     "static/media/sign-out.svg": "/account-monitor-frontend/static/media/sign-out.dd67feba907391aa7f3ef70c96105e46.svg",
     "main.59f8d3d1.css.map": "/account-monitor-frontend/static/css/main.59f8d3d1.css.map",
-    "main.b0a6525c.js.map": "/account-monitor-frontend/static/js/main.b0a6525c.js.map",
+    "main.dac2f954.js.map": "/account-monitor-frontend/static/js/main.dac2f954.js.map",
     "488.e75445ad.chunk.js.map": "/account-monitor-frontend/static/js/488.e75445ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.59f8d3d1.css",
-    "static/js/main.b0a6525c.js"
+    "static/js/main.dac2f954.js"
   ]
 }
