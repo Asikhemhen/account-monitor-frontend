@@ -4,11 +4,12 @@ const MainTable = () => {
   const [data, setData] = useState([]); // Initialize as an empty array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/account_info");
+        const response = await fetch(`${BASE_URL}/api/account_info`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
