@@ -8,12 +8,15 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("URL: ", process.env.REACT_APP_API_BASE_URL);
+
     // Replace with your actual backend URL
-    const apiUrl = "/api/login";
+    const apiUrl = `${BASE_URL}/api/login`;
 
     try {
       // Make a POST request to the backend API
