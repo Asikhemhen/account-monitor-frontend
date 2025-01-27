@@ -13,7 +13,8 @@ const AdminDashboard = () => {
   const { data, loading, error } = useAuth();
 
   const sumProperty = (array, key) => {
-    return array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
+    const sum = array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
+    return sum.toFixed(2);
   };
 
   return (
