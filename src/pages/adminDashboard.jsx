@@ -12,12 +12,8 @@ import MainTable from "../components/main-table";
 const AdminDashboard = () => {
   const { data, loading, error } = useAuth();
 
-  const sumProperty = (array) => {
-    return array.reduce((sum, item) => {
-      return (
-        sum + Object.values(item).reduce((a, b) => a + Number(b), 0) // Convert to number
-      );
-    }, 0);
+  const sumProperty = (array, key) => {
+    return array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
   };
 
   return (
