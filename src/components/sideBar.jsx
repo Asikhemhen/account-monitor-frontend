@@ -17,7 +17,7 @@ const SideBar = () => {
     navigate("/login");
   };
   return (
-    <div className="flex flex-col pt-6 justify-start items-center bg-blue-800 h-full max-w-20 min-w-20 fixed top-20 z-20">
+    <div className="flex flex-col pt-8 justify-start items-center bg-blue-800 h-full max-w-20 min-w-20 fixed top-20 z-20">
       {userRole === "admin" ? (
         <>
           <Link to="/">

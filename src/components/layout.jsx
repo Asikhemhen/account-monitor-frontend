@@ -20,7 +20,6 @@ const Layout = () => {
 
   return (
     <div className="app-layout">
-      <Navbar />
       <div className="main-content">
         <Navbar />
         <main>
