@@ -79,5 +79,10 @@
       "currentOpenLots": "Lotes Abertos Atuais"
     },
     "noDataAvailable": "Nenhum dado disponível"
+  },
+
+  "footer": {
+    "copyright": "Copyright",
+    "allRightsReserved": "Todos os Direitos Reservados"
   }
 }
