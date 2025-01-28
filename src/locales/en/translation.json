@@ -9,6 +9,7 @@
 
   "usersPage": {
     "title": "Users",
+    "email": "Email",
     "loading": "Loading...",
     "error": "Error",
     "confirmDelete": "Are you sure you want to delete this user?",
@@ -20,5 +21,25 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "rights": "Rights"
+  },
+
+  "customerDashboard": {
+    "totalAccounts": "Total Accounts",
+    "totalEquity": "Total Equity",
+    "totalDeposit": "Total Deposit",
+    "totalWithdrawal": "Total Withdrawal",
+    "lastWeekProfit": "Last Week Profit",
+    "todaysProfit": "Today's Profit",
+    "totalProfit": "Total Profit"
+  },
+
+  "adminDashboard": {
+    "totalAccounts": "Total Accounts",
+    "totalEquity": "Total Equity",
+    "totalDeposit": "Total Deposit",
+    "totalWithdrawal": "Total Withdrawal",
+    "lastWeekProfit": "Last Week Profit",
+    "todaysProfit": "Today's Profit",
+    "totalProfit": "Total Profit"
   }
 }

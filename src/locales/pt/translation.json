@@ -9,6 +9,7 @@
 
   "usersPage": {
     "title": "Usuários",
+    "email": "E-mail",
     "loading": "Carregando...",
     "error": "Erro",
     "confirmDelete": "Tem certeza de que deseja excluir este usuário?",
@@ -18,7 +19,27 @@
     "noData": "Nenhum dado disponível",
     "delete": "Excluir",
     "firstName": "Primeiro Nome",
-    "lastName": "Sobrenome",
+    "lasmtNae": "Sobrenome",
     "rights": "Direitos"
+  },
+
+  "customerDashboard": {
+    "totalAccounts": "Contas Totais",
+    "totalEquity": "Equidade Total",
+    "totalDeposit": "Depósito Total",
+    "totalWithdrawal": "Retirada Total",
+    "lastWeekProfit": "Lucro da Última Semana",
+    "todaysProfit": "Lucro de Hoje",
+    "totalProfit": "Lucro Total"
+  },
+
+  "adminDashboard": {
+    "totalAccounts": "Contas Totais",
+    "totalEquity": "Equidade Total",
+    "totalDeposit": "Depósito Total",
+    "totalWithdrawal": "Retirada Total",
+    "lastWeekProfit": "Lucro da Última Semana",
+    "todaysProfit": "Lucro de Hoje",
+    "totalProfit": "Lucro Total"
   }
 }
