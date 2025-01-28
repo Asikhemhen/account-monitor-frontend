@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const UsersPage = () => {
-  const [data, setData] = useState([]); // Initialize as an empty array
+  const { t } = useTranslation();
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [actionState, setActionState] = useState("");
-  const [bgState, setbgState] = useState("");
+  const [bgState, setBgState] = useState("");
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
@@ -13,10 +15,10 @@ const UsersPage = () => {
       try {
         const response = await fetch(`${BASE_URL}/api/users`);
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error(t("usersPage.error"));
         }
         const result = await response.json();
-        setData(result); // Directly set `result` as `data`
+        setData(result);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -25,18 +27,22 @@ const UsersPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [BASE_URL, t]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t("usersPage.loading")}</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div>
+        {t("usersPage.error")}: {error}
+      </div>
+    );
   }
 
   const handleDelete = async (email) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) return;
+    if (!window.confirm(t("usersPage.confirmDelete"))) return;
 
     try {
       const response = await fetch(`${BASE_URL}/api/users/${email}`, {
@@ -45,80 +51,54 @@ const UsersPage = () => {
 
       if (!response.ok) {
         if (response.status === 404) {
-          // throw new Error("User not found");
-          setActionState("User not found");
-          setbgState("bg-red-200");
+          setActionState(t("usersPage.userNotFound"));
+          setBgState("bg-red-200");
         }
-        // throw new Error("Failed to delete user");
-        setActionState("Failed to delete user");
-        setbgState("bg-red-200");
+        setActionState(t("usersPage.deleteFailed"));
+        setBgState("bg-red-200");
       }
 
       setData((prevData) => prevData.filter((user) => user.email !== email));
-      // alert("User deleted successfully");
-      setActionState("User deleted successfully");
-      setbgState("bg-green-200");
+      setActionState(t("usersPage.deleteSuccess"));
+      setBgState("bg-green-200");
 
-      // Reset actionState after 5 seconds
       setTimeout(() => {
-        setActionState(""); // Clear the success message after 5 seconds
+        setActionState("");
       }, 3000);
     } catch (err) {
-      alert("Error deleting user: " + err.message);
-      setActionState("Error deleting user: " + err.message);
-      setbgState("bg-red-200");
-    }
-  };
-
-  const handleEdit = (user) => {
-    const updatedFirstName = prompt(
-      "Enter new first name:",
-      user.first_name || ""
-    );
-    const updatedLastName = prompt(
-      "Enter new last name:",
-      user.last_name || ""
-    );
-
-    if (updatedFirstName && updatedLastName) {
-      const updatedUser = {
-        ...user,
-        first_name: updatedFirstName,
-        last_name: updatedLastName,
-      };
-
-      // Simulate backend update
-      setData((prevData) =>
-        prevData.map((u) => (u.email === user.email ? updatedUser : u))
-      );
-
-      // If backend update is required:
-      // updateUserInBackend(user.email, updatedUser);
+      alert(t("usersPage.error") + ": " + err.message);
+      setActionState(t("usersPage.error") + ": " + err.message);
+      setBgState("bg-red-200");
     }
   };
 
   return (
     <div className="h-screen bg-white rounded-lg border shadow-md pt-4 px-5 mt-28 ml-20">
       <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5">
-        Users
+        {t("usersPage.title")}
       </h1>
       {actionState && (
         <div className={`${bgState} ml-5 px-5 py-2`}>{actionState}</div>
       )}
       <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide">
         <table className="border-collapse w-full">
-          {/* Table Header */}
           <thead className="sticky top-0 z-10 bg-white text-blue-800">
             <tr>
-              <th className="min-w-20 px-2 py-2 text-left">Email</th>
-              <th className="min-w-20 px-2 py-2 text-center">First Name</th>
-              <th className="min-w-20 px-2 py-2 text-center">Last Name</th>
-              <th className="min-w-20 px-2 py-2 text-center">Rights</th>
+              <th className="min-w-20 px-2 py-2 text-left">
+                {t("usersPage.email")}
+              </th>
+              <th className="min-w-20 px-2 py-2 text-center">
+                {t("usersPage.firstName")}
+              </th>
+              <th className="min-w-20 px-2 py-2 text-center">
+                {t("usersPage.lastName")}
+              </th>
+              <th className="min-w-20 px-2 py-2 text-center">
+                {t("usersPage.rights")}
+              </th>
               <th className="min-w-20 px-2 py-2 text-center"></th>
             </tr>
           </thead>
-
-          {/* Table Body */}
           <tbody>
             {data.length > 0 ? (
               data.map((row, index) => (
@@ -142,17 +122,11 @@ const UsersPage = () => {
                   </td>
                   <td className="text-center min-w-20 px-2 py-2 border-y">
                     <div className="flex justify-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {/* <button
-                        className="bg-blue-800 text-white h-7 text-sm px-2 rounded hover:bg-blue-900"
-                        onClick={handleEdit}
-                      >
-                        Edit
-                      </button> */}
                       <button
                         className="bg-red-800 h-7 text-sm text-white px-2 rounded hover:bg-red-900"
                         onClick={() => handleDelete(row.email)}
                       >
-                        Delete
+                        {t("usersPage.delete")}
                       </button>
                     </div>
                   </td>
@@ -161,7 +135,7 @@ const UsersPage = () => {
             ) : (
               <tr>
                 <td colSpan="5" className="text-center py-4">
-                  No data available
+                  {t("usersPage.noData")}
                 </td>
               </tr>
             )}

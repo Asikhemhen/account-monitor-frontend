@@ -1,0 +1,24 @@
+{
+  "loginPage": {
+    "Login": "Entrar",
+    "Email": "E-mail",
+    "Password": "Senha",
+    "Unexpected_error": "Erro inesperado!",
+    "Unknown_user_rights": "Direitos de usuário desconhecidos"
+  },
+
+  "usersPage": {
+    "title": "Usuários",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "confirmDelete": "Tem certeza de que deseja excluir este usuário?",
+    "userNotFound": "Usuário não encontrado",
+    "deleteFailed": "Falha ao excluir usuário",
+    "deleteSuccess": "Usuário excluído com sucesso",
+    "noData": "Nenhum dado disponível",
+    "delete": "Excluir",
+    "firstName": "Primeiro Nome",
+    "lastName": "Sobrenome",
+    "rights": "Direitos"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "loginPage": {
+    "Login": "Login",
+    "Email": "Email",
+    "Password": "Password",
+    "Unexpected_error": "Unexpected error!",
+    "Unknown_user_rights": "Unknown user rights"
+  },
+
+  "usersPage": {
+    "title": "Users",
+    "loading": "Loading...",
+    "error": "Error",
+    "confirmDelete": "Are you sure you want to delete this user?",
+    "userNotFound": "User not found",
+    "deleteFailed": "Failed to delete user",
+    "deleteSuccess": "User deleted successfully",
+    "noData": "No data available",
+    "delete": "Delete",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "rights": "Rights"
+  }
+}

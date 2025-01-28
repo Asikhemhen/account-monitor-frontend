@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +9,12 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  useEffect(() => {
+    i18n.changeLanguage("pt"); // Set default language to Portuguese
+  }, [i18n]); // The empty dependency array ensures this only runs once on mount
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +49,7 @@ const LoginPage = () => {
           login("user", data.user.first_name); // Set role to user
           navigate("/customer/dashboard");
         } else {
-          throw new Error("Unknown user rights");
+          throw new Error(t("Unknown user rights"));
         }
 
         // console.log("KKKK: ", data.token);
@@ -53,12 +59,12 @@ const LoginPage = () => {
         //window.location.href = "/dashboard";
       } else {
         // Handle login failure
-        setError(`${data.error}`);
+        setError(`${t(data.error)}`);
         setPassword("");
       }
     } catch (error) {
       // Handle network or unexpected errors
-      setError("Unexpected error!");
+      setError(t("loginPage.Unexpected_error"));
       setPassword("");
     }
   };
@@ -67,7 +73,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-white px-5">
       <div className="w-full max-w-sm p-10 bg-white border rounded-lg shadow-lg">
         <h2 className="text-2xl font-extrabold text-center text-blue-950 mb-6">
-          Login
+          {t("loginPage.Login")}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -75,7 +81,7 @@ const LoginPage = () => {
               htmlFor="email"
               className="block text-sm font-bold text-blue-950"
             >
-              Email
+              {t("loginPage.Email")}
             </label>
             <input
               type="email"
@@ -91,7 +97,7 @@ const LoginPage = () => {
               htmlFor="password"
               className="block text-sm font-bold text-blue-950"
             >
-              Password
+              {t("loginPage.Password")}
             </label>
             <input
               type="password"
@@ -104,12 +110,12 @@ const LoginPage = () => {
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-700"
             />
           </div>
-          {error && <p className="text-sm text-red-800">{error}</p>}
+          {error && <p className="text-sm text-red-800">{t(error)}</p>}
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-950 focus:outline-none focus:ring-1 focus:ring-blue-950"
           >
-            Login
+            {t("loginPage.Login")}
           </button>
         </form>
       </div>
