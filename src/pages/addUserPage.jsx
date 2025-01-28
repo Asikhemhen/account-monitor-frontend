@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const AddUserPage = () => {
+  const { t, i18n } = useTranslation();
   const [error, setError] = useState("");
   const [okay, setOkay] = useState("");
   const [formData, setFormData] = useState({
@@ -10,6 +12,10 @@ const AddUserPage = () => {
     password: "",
     user_rights: "",
   });
+
+  useEffect(() => {
+    i18n.changeLanguage("pt"); // Set default language to Portuguese
+  }, [i18n]); // The empty dependency array ensures this only runs once on mount
 
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -33,7 +39,7 @@ const AddUserPage = () => {
 
       if (response.ok) {
         setError("");
-        setOkay("User added successfully!");
+        setOkay(t("addUserPage.successUserAdded"));
         setFormData({
           first_name: "",
           last_name: "",
@@ -42,10 +48,10 @@ const AddUserPage = () => {
           user_rights: "",
         });
       } else if (response.status === 409) {
-        setError("Email already exists. Please use a different email.");
+        setError(t("addUserPage.errorEmailExists"));
         setOkay("");
       } else {
-        setError("Failed to add user. Please try again.");
+        setError(t("addUserPage.errorAddingUser"));
         setOkay("");
       }
       // Reset after 5 seconds
@@ -53,7 +59,7 @@ const AddUserPage = () => {
         setOkay("");
       }, 5000);
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      setError(t("addUserPage.errorGeneral"));
     }
   };
 
@@ -61,7 +67,7 @@ const AddUserPage = () => {
     <div className="flex justify-center items-center h-screen bg-white px-6 mt-16">
       <div className="bg-white p-8 border rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-extrabold text-blue-900 text-center mb-6">
-          Add User
+          {t("addUserPage.title")}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -69,7 +75,7 @@ const AddUserPage = () => {
               htmlFor="first_name"
               className="block text-sm font-bold text-blue-900"
             >
-              First Name
+              {t("addUserPage.firstNameLabel")}
             </label>
             <input
               type="text"
@@ -78,7 +84,7 @@ const AddUserPage = () => {
               value={formData.first_name}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm"
-              placeholder="Enter first name"
+              placeholder={t("addUserPage.firstNameLabel")}
               required
             />
           </div>
@@ -87,7 +93,7 @@ const AddUserPage = () => {
               htmlFor="last_name"
               className="block text-sm font-bold text-blue-900"
             >
-              Last Name
+              {t("addUserPage.lastNameLabel")}
             </label>
             <input
               type="text"
@@ -96,7 +102,7 @@ const AddUserPage = () => {
               value={formData.last_name}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm"
-              placeholder="Enter last name"
+              placeholder={t("addUserPage.lastNameLabel")}
               required
             />
           </div>
@@ -105,7 +111,7 @@ const AddUserPage = () => {
               htmlFor="email"
               className="block text-sm font-bold text-blue-900"
             >
-              Email
+              {t("addUserPage.emailLabel")}
             </label>
             <input
               type="email"
@@ -114,7 +120,7 @@ const AddUserPage = () => {
               value={formData.email}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm"
-              placeholder="Enter email address"
+              placeholder={t("addUserPage.emailLabel")}
               required
             />
           </div>
@@ -123,7 +129,7 @@ const AddUserPage = () => {
               htmlFor="password"
               className="block text-sm font-bold text-blue-900"
             >
-              Password
+              {t("addUserPage.passwordLabel")}
             </label>
             <input
               type="password"
@@ -132,7 +138,7 @@ const AddUserPage = () => {
               value={formData.password}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm"
-              placeholder="Enter password"
+              placeholder={t("addUserPage.passwordLabel")}
               required
               minLength={8}
               maxLength={20}
@@ -143,7 +149,7 @@ const AddUserPage = () => {
               htmlFor="user_rights"
               className="block text-sm font-bold text-blue-900"
             >
-              User Rights
+              {t("addUserPage.userRightsLabel")}
             </label>
             <select
               id="user_rights"
@@ -153,9 +159,9 @@ const AddUserPage = () => {
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm"
               required
             >
-              <option value="">Select user right</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
+              <option value="">{t("addUserPage.selectUserRights")}</option>
+              <option value="admin">{t("addUserPage.adminOption")}</option>
+              <option value="user">{t("addUserPage.userOption")}</option>
             </select>
           </div>
           {error && <p className="text-sm text-red-800 py-3">{error}</p>}
@@ -165,7 +171,7 @@ const AddUserPage = () => {
               type="submit"
               className="w-full bg-blue-900 text-white p-2 rounded-md hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-950 focus:ring-offset-2"
             >
-              Submit
+              {t("addUserPage.submitButton")}
             </button>
           </div>
         </form>

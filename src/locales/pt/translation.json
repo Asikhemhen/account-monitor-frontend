@@ -41,5 +41,43 @@
     "lastWeekProfit": "Lucro da Última Semana",
     "todaysProfit": "Lucro de Hoje",
     "totalProfit": "Lucro Total"
+  },
+
+  "addUserPage": {
+    "title": "Adicionar Usuário",
+    "firstNameLabel": "Primeiro Nome",
+    "lastNameLabel": "Último Nome",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Senha",
+    "userRightsLabel": "Direitos do Usuário",
+    "selectUserRights": "Selecione o direito do usuário",
+    "adminOption": "Administrador",
+    "userOption": "Usuário",
+    "submitButton": "Enviar",
+    "errorEmailExists": "O e-mail já existe. Por favor, use um e-mail diferente.",
+    "errorAddingUser": "Falha ao adicionar usuário. Por favor, tente novamente.",
+    "errorGeneral": "Ocorreu um erro. Por favor, tente novamente.",
+    "successUserAdded": "Usuário adicionado com sucesso!"
+  },
+
+  "mainTable": {
+    "accountDetails": "Detalhes da Conta",
+    "show": "Mostrar",
+    "entries": "entradas",
+    "searchPlaceholder": "Pesquise aqui...",
+    "tableHeaders": {
+      "accountName": "Nome da Conta",
+      "accountNumber": "Número da Conta",
+      "balance": "Saldo",
+      "equity": "Equidade",
+      "totalWithdraw": "Total Retirado",
+      "totalProfitDaily": "Lucro Total Diário",
+      "totalProfitWeekly": "Lucro Total Semanal",
+      "currentMonthsProfit": "Lucro do Mês Atual",
+      "lastPositionTime": "Último Tempo de Posição",
+      "currentOpenOrders": "Pedidos Abertos Atuais",
+      "currentOpenLots": "Lotes Abertos Atuais"
+    },
+    "noDataAvailable": "Nenhum dado disponível"
   }
 }

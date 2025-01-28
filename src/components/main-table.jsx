@@ -1,56 +1,44 @@
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useAuth } from "../AuthContext";
+import { useTranslation } from "react-i18next";
 
 const MainTable = () => {
-  const [data, setData] = useState([]); // Initialize as an empty array
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const { t, i18n } = useTranslation(); // Initialize translation hook
+  const { data, loading, error } = useAuth();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/account_info`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const result = await response.json();
-        // console.log(result); // Log the response to inspect it
-        setData(result); // Directly set `result` as `data`
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+    i18n.changeLanguage("pt"); // Set default language to Portuguese
+  }, [i18n]); // The empty dependency array ensures this only runs once on mount
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div>
+        {t("error")}: {error}
+      </div>
+    );
   }
 
   return (
     <div className="bg-white rounded-lg border shadow-md pt-5">
       <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5">
-        Account Details
+        {t("mainTable.accountDetails")}
       </h1>
       <div className="flex flex-col sm:flex-row justify-between basis-auto items-center gap-2 px-5 mb-5">
         <div className="flex gap-1">
-          <label>Show</label>
+          <label>{t("mainTable.show")}</label>
           <input
             type="text"
             className="text-sm text-center px-2 h-7 w-20 bg-white border border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
           />
-          <label>entries</label>
+          <label>{t("mainTable.entries")}</label>
         </div>
         <input
           type="text"
-          placeholder="Search here..."
+          placeholder={t("mainTable.searchPlaceholder")}
           className="h-7 w-40 bg-white border text-sm text-center px-2 border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
         />
       </div>
@@ -59,30 +47,38 @@ const MainTable = () => {
           {/* Table Header */}
           <thead className="sticky top-0 z-10 bg-white text-blue-800">
             <tr>
-              <th className="min-w-30 px-2 py-2 text-left">Account Name</th>
-              <th className="min-w-30 px-2 py-2 text-center">Account Number</th>
-              <th className="min-w-30 px-2 py-2 text-center">Balance</th>
-              <th className="min-w-30 px-2 py-2 text-center">Equity</th>
-              {/* <th className="max-w-24 px-2 py-2 text-center">Drawdown</th> */}
-              <th className="min-w-30 px-2 py-2 text-center">Total Withdraw</th>
-              <th className="min-w-30 px-2 py-2 text-center">
-                Total Profit Daily
+              <th className="min-w-30 px-2 py-2 text-left">
+                {t("mainTable.tableHeaders.accountName")}
               </th>
               <th className="min-w-30 px-2 py-2 text-center">
-                Total Profit Weekly
+                {t("mainTable.tableHeaders.accountNumber")}
               </th>
               <th className="min-w-30 px-2 py-2 text-center">
-                Current Month's Profit
+                {t("mainTable.tableHeaders.balance")}
               </th>
               <th className="min-w-30 px-2 py-2 text-center">
-                Last Position Time
+                {t("mainTable.tableHeaders.equity")}
               </th>
-              {/* <th className="min-w-30 px-2 py-2 text-center">Current PnL</th> */}
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.totalWithdraw")}
+              </th>
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.totalProfitDaily")}
+              </th>
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.totalProfitWeekly")}
+              </th>
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.currentMonthsProfit")}
+              </th>
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.lastPositionTime")}
+              </th>
               <th className="max-w-24 px-2 py-2 text-center">
-                Current Open Orders
+                {t("mainTable.tableHeaders.currentOpenOrders")}
               </th>
               <th className="max-w-24 px-2 py-2 text-center">
-                Current Open Lots
+                {t("mainTable.tableHeaders.currentOpenLots")}
               </th>
             </tr>
           </thead>
@@ -103,7 +99,6 @@ const MainTable = () => {
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.account_number}
                   </td>
-
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.balance}
                   </td>
@@ -113,9 +108,6 @@ const MainTable = () => {
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.total_withdraw}
                   </td>
-                  {/* <td className="text-center max-w-24 px-2 py-2 border-y">
-                    {row.drawdown}
-                  </td> */}
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.total_profit_daily}
                   </td>
@@ -128,9 +120,6 @@ const MainTable = () => {
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.last_position_time}
                   </td>
-                  {/* <td className="text-center min-w-30 px-2 py-2 border-y">
-                    {row.current_pnl}
-                  </td> */}
                   <td className="text-center max-w-24 px-2 py-2 border-y">
                     {row.current_open_orders}
                   </td>
@@ -141,8 +130,8 @@ const MainTable = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="13" className="text-center py-4">
-                  No data available
+                <td colSpan="11" className="text-center py-4">
+                  {t("mainTable.noDataAvailable")}
                 </td>
               </tr>
             )}

@@ -41,5 +41,43 @@
     "lastWeekProfit": "Last Week Profit",
     "todaysProfit": "Today's Profit",
     "totalProfit": "Total Profit"
+  },
+
+  "addUserPage": {
+    "title": "Add User",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "userRightsLabel": "User Rights",
+    "selectUserRights": "Select user rights",
+    "adminOption": "Admin",
+    "userOption": "User",
+    "submitButton": "Submit",
+    "errorEmailExists": "Email already exists. Please use a different email.",
+    "errorAddingUser": "Failed to add user. Please try again.",
+    "errorGeneral": "An error occurred. Please try again.",
+    "successUserAdded": "User added successfully!"
+  },
+
+  "mainTable": {
+    "accountDetails": "Account Details",
+    "show": "Show",
+    "entries": "entries",
+    "searchPlaceholder": "Search here...",
+    "tableHeaders": {
+      "accountName": "Account Name",
+      "accountNumber": "Account Number",
+      "balance": "Balance",
+      "equity": "Equity",
+      "totalWithdraw": "Total Withdraw",
+      "totalProfitDaily": "Total Profit Daily",
+      "totalProfitWeekly": "Total Profit Weekly",
+      "currentMonthsProfit": "Current Month's Profit",
+      "lastPositionTime": "Last Position Time",
+      "currentOpenOrders": "Current Open Orders",
+      "currentOpenLots": "Current Open Lots"
+    },
+    "noDataAvailable": "No data available"
   }
 }
