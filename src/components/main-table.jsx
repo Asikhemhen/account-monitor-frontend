@@ -22,6 +22,22 @@ const MainTable = () => {
     );
   }
 
+  const formattedDate = (date) => {
+    return (
+      date.getFullYear() +
+      "-" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(date.getDate()).padStart(2, "0") +
+      " " +
+      String(date.getHours()).padStart(2, "0") +
+      ":" +
+      String(date.getMinutes()).padStart(2, "0") +
+      ":" +
+      String(date.getSeconds()).padStart(2, "0")
+    );
+  };
+
   return (
     <div className="bg-white rounded-lg border shadow-md pt-5">
       <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5">
@@ -118,7 +134,7 @@ const MainTable = () => {
                     {row.monthly_profit}
                   </td>
                   <td className="text-center min-w-30 px-2 py-2 border-y">
-                    {row.last_position_time}
+                    {formattedDate(row.last_position_time)}
                   </td>
                   <td className="text-center max-w-24 px-2 py-2 border-y">
                     {row.current_open_orders}
