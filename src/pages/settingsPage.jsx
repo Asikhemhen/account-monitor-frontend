@@ -1,22 +1,53 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; // Import axios for API requests
 import { useTranslation } from "react-i18next";
-import data from "../data/data.json";
 
 const SettingsPage = () => {
   const { t, i18n } = useTranslation();
-  const [accounts, setAccounts] = useState(data);
+  const [accounts, setAccounts] = useState([]);
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     i18n.changeLanguage("pt");
-  }, [i18n]);
 
+    // Fetch accounts from the database
+    const fetchAccounts = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/account_info`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch accounts");
+        }
+        const data = await response.json();
+        setAccounts(data);
+      } catch (error) {
+        console.error("Error fetching accounts:", error);
+      }
+    };
+
+    fetchAccounts();
+  }, [i18n, BASE_URL]);
+
+  // Function to hide an account (set show_to_users = 0)
   const handleHideAccount = async (accountNumber) => {
     try {
-      await axios.put(`${BASE_URL}/api/account_info/${accountNumber}/hide`);
+      const response = await fetch(
+        `${BASE_URL}/api/account_info/${accountNumber}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ show_to_users: 0 }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to hide account");
+      }
+
       setAccounts(
-        accounts.filter((account) => account.account_number !== accountNumber)
+        accounts.map((account) =>
+          account.account_number === accountNumber
+            ? { ...account, show_to_users: 0 }
+            : account
+        )
       );
     } catch (error) {
       console.error("Error hiding account:", error);
