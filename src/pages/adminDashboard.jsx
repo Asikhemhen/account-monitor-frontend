@@ -1,5 +1,5 @@
 import { useAuth } from "../AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/card";
 import equity from "../assets/images/equity.svg";
 import accounts from "../assets/images/accounts.svg";
