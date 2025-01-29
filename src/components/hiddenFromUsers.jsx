@@ -73,10 +73,10 @@ const Hidden = () => {
 
   return (
     <div className="bg-white rounded-lg border shadow-md">
-      <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5">
+      <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5 pt-10">
         {t("settingsPage.accountsHidden")}
       </h1>
-      <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide">
+      <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide pb-10">
         <table className="border-collapse w-full">
           <thead className="sticky top-0 z-10 bg-white text-blue-800">
             <tr>
