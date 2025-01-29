@@ -126,6 +126,8 @@ const CustomerDashboard = () => {
           <input
             type="text"
             placeholder={t("mainTable.searchPlaceholder")}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="h-7 w-40 bg-white border text-sm text-center px-2 border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
           />
         </div>
