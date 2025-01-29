@@ -23,9 +23,7 @@ const SettingsPage = () => {
         setVisibleAccounts(
           data.filter((account) => account.show_to_users === 1)
         );
-        setHiddenAccounts(
-          data.filter((account) => account.show_to_users === 0)
-        );
+        setHiddenAccounts(data.filter((account) => account.show_to_users != 1));
       } catch (error) {
         console.error("Error fetching accounts:", error);
       }
@@ -257,7 +255,7 @@ const SettingsPage = () => {
                   >
                     <td className="px-2 py-2 border-y relative">
                       <button
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-sm text-white px-2 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-800 h-7 text-sm text-white px-2 rounded hover:bg-blue-900 py-1 opacity-0 group-hover:opacity-100 transition"
                         onClick={() => handleShowAccount(row.account_number)}
                       >
                         Show
