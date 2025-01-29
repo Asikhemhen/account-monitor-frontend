@@ -90,14 +90,14 @@ const MainTable = () => {
               <th className="min-w-30 px-2 py-2 text-center">
                 {t("mainTable.tableHeaders.currentMonthsProfit")}
               </th>
-              <th className="min-w-30 px-2 py-2 text-center">
-                {t("mainTable.tableHeaders.lastPositionTime")}
-              </th>
               <th className="max-w-24 px-2 py-2 text-center">
                 {t("mainTable.tableHeaders.currentOpenOrders")}
               </th>
               <th className="max-w-24 px-2 py-2 text-center">
                 {t("mainTable.tableHeaders.currentOpenLots")}
+              </th>
+              <th className="min-w-30 px-2 py-2 text-center">
+                {t("mainTable.tableHeaders.lastPositionTime")}
               </th>
             </tr>
           </thead>
@@ -136,14 +136,14 @@ const MainTable = () => {
                   <td className="text-center min-w-30 px-2 py-2 border-y">
                     {row.monthly_profit}
                   </td>
-                  <td className="text-center min-w-30 px-2 py-2 border-y">
-                    {formattedDate(row.last_position_time)}
-                  </td>
                   <td className="text-center max-w-24 px-2 py-2 border-y">
                     {row.current_open_orders}
                   </td>
                   <td className="text-center max-w-24 px-2 py-2 border-y">
                     {row.current_open_lots}
+                  </td>
+                  <td className="text-center min-w-30 px-2 py-2 border-y">
+                    {formattedDate(row.last_position_time)}
                   </td>
                 </tr>
               ))
