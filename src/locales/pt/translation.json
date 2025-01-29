@@ -87,7 +87,7 @@
   },
 
   "settingsPage": {
-    "accountsDisplayed": "Seen by Users",
-    "accountsHidden": "Hidden From Users"
+    "accountsDisplayed": "Visto pelos usuários",
+    "accountsHidden": "Oculto dos usuários"
   }
 }
