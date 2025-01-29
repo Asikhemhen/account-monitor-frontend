@@ -24,20 +24,20 @@
   },
 
   "customerDashboard": {
-    "totalAccounts": "Contas Totais",
-    "totalEquity": "Equidade Total",
-    "totalDeposit": "Depósito Total",
-    "totalWithdrawal": "Retirada Total",
+    "totalAccounts": "Total de Contas",
+    "totalEquity": "Total de Capital Líquido",
+    "totalDeposit": "Total de Depósito",
+    "totalWithdrawal": "Total de Saques",
     "lastWeekProfit": "Lucro da Última Semana",
     "todaysProfit": "Lucro de Hoje",
     "totalProfit": "Lucro Total"
   },
 
   "adminDashboard": {
-    "totalAccounts": "Contas Totais",
-    "totalEquity": "Equidade Total",
-    "totalDeposit": "Depósito Total",
-    "totalWithdrawal": "Retirada Total",
+    "totalAccounts": "Total de Contas",
+    "totalEquity": "Total de Capital Líquido",
+    "totalDeposit": "Total de Depósito",
+    "totalWithdrawal": "Total de Saques",
     "lastWeekProfit": "Lucro da Última Semana",
     "todaysProfit": "Lucro de Hoje",
     "totalProfit": "Lucro Total"
@@ -69,14 +69,14 @@
       "accountName": "Nome da Conta",
       "accountNumber": "Número da Conta",
       "balance": "Saldo",
-      "equity": "Equidade",
-      "totalWithdraw": "Total Retirado",
+      "equity": "Capital Líquido",
+      "totalWithdraw": "TTotal de Saques",
       "totalProfitDaily": "Lucro Total Diário",
       "totalProfitWeekly": "Lucro Total Semanal",
       "currentMonthsProfit": "Lucro do Mês Atual",
-      "lastPositionTime": "Último Tempo de Posição",
-      "currentOpenOrders": "Pedidos Abertos Atuais",
-      "currentOpenLots": "Lotes Abertos Atuais"
+      "lastPositionTime": "Última Ordem",
+      "currentOpenOrders": "Ordens Abertas",
+      "currentOpenLots": "Lotes Abertos"
     },
     "noDataAvailable": "Nenhum dado disponível"
   },
