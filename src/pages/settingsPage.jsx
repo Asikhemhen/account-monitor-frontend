@@ -100,7 +100,7 @@ const SettingsPage = () => {
           <table className="border-collapse w-full">
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
               <tr>
-                <th className="px-2 py-2 pr-14 text-left">{""}</th>
+                <th className="px-2 py-2 pr-24 text-left">{""}</th>
                 <th className="px-2 py-2 text-left">
                   {t("mainTable.tableHeaders.accountName")}
                 </th>
@@ -208,7 +208,7 @@ const SettingsPage = () => {
           <table className="border-collapse w-full">
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
               <tr>
-                <th className="px-2 py-2 pr-14 text-left">{""}</th>
+                <th className="px-2 py-2 pr-24 text-left">{""}</th>
                 <th className="px-2 py-2 text-left">
                   {t("mainTable.tableHeaders.accountName")}
                 </th>
