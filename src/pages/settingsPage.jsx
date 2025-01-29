@@ -150,7 +150,7 @@ const SettingsPage = () => {
                         className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-sm text-white px-2 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
                         onClick={() => handleHideAccount(row.account_number)}
                       >
-                        Hide
+                        {t("settingsPage.hide")}
                       </button>
                     </td>
                     <td className="text-left px-2 py-2 border-y">
@@ -258,7 +258,7 @@ const SettingsPage = () => {
                         className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-800 h-7 text-sm text-white px-2 rounded hover:bg-blue-900 py-1 opacity-0 group-hover:opacity-100 transition"
                         onClick={() => handleShowAccount(row.account_number)}
                       >
-                        Show
+                        {t("settingsPage.show")}
                       </button>
                     </td>
                     <td className="text-left px-2 py-2 border-y">
