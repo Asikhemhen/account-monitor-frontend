@@ -17,7 +17,11 @@ const Hidden = () => {
           throw new Error("Failed to fetch accounts");
         }
         const data = await response.json();
-        setAccounts(data);
+        // Filter accounts to only include those with show_to_users === 0
+        const filteredAccounts = data.filter(
+          (account) => account.show_to_users === 0
+        );
+        setAccounts(filteredAccounts);
       } catch (error) {
         console.error("Error fetching accounts:", error);
       }
@@ -26,8 +30,8 @@ const Hidden = () => {
     fetchAccounts();
   }, [i18n, BASE_URL]);
 
-  // Function to hide an account (set show_to_users = 0)
-  const handleHideAccount = async (accountNumber) => {
+  // Function to show an account (set show_to_users = 0)
+  const handleShowAccount = async (accountNumber) => {
     try {
       const response = await fetch(
         `${BASE_URL}/api/account_info/${accountNumber}/show`,
@@ -39,13 +43,13 @@ const Hidden = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to hide account");
+        throw new Error("Failed to show account");
       }
 
       setAccounts(
         accounts.map((account) =>
           account.account_number === accountNumber
-            ? { ...account, show_to_users: 0 }
+            ? { ...account, show_to_users: 1 }
             : account
         )
       );
@@ -128,9 +132,9 @@ const Hidden = () => {
                   <td className="px-2 py-2 border-y relative">
                     <button
                       className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-sm text-white px-2 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
-                      onClick={() => handleHideAccount(row.account_number)}
+                      onClick={() => handleShowAccount(row.account_number)}
                     >
-                      Hide
+                      Show
                     </button>
                   </td>
                   <td className="text-left px-2 py-2 border-y">
