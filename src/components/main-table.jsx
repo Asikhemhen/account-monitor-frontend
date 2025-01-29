@@ -22,7 +22,10 @@ const MainTable = () => {
     );
   }
 
-  const formattedDate = (date) => {
+  const formattedDate = (date_convert) => {
+    const isoDate = date_convert;
+    const date = new Date(isoDate);
+
     return (
       date.getFullYear() +
       "-" +
