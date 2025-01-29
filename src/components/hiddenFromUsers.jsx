@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 const Hidden = () => {
   const { t, i18n } = useTranslation();
   const [accounts, setAccounts] = useState([]);
+  const [refreshTrigger, setRefreshTrigger] = useState(false); // Track updates
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Hidden = () => {
     };
 
     fetchAccounts();
-  }, [i18n, BASE_URL]);
+  }, [i18n, BASE_URL, refreshTrigger]);
 
   // Function to show an account (set show_to_users = 0)
   const handleShowAccount = async (accountNumber) => {
@@ -46,13 +47,8 @@ const Hidden = () => {
         throw new Error("Failed to show account");
       }
 
-      setAccounts(
-        accounts.map((account) =>
-          account.account_number === accountNumber
-            ? { ...account, show_to_users: 1 }
-            : account
-        )
-      );
+      // Trigger re-fetch by toggling refreshTrigger state
+      setRefreshTrigger((prev) => !prev);
     } catch (error) {
       console.error("Error hiding account:", error);
     }

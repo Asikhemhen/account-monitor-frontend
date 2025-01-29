@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const Visible = () => {
   const { t, i18n } = useTranslation();
+  const [refreshTrigger, setRefreshTrigger] = useState(false); // Track updates
   const [accounts, setAccounts] = useState([]);
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -29,7 +30,7 @@ const Visible = () => {
     };
 
     fetchAccounts();
-  }, [i18n, BASE_URL]);
+  }, [i18n, BASE_URL, refreshTrigger]);
 
   // Function to hide an account (set show_to_users = 0)
   const handleHideAccount = async (accountNumber) => {
@@ -47,13 +48,8 @@ const Visible = () => {
         throw new Error("Failed to hide account");
       }
 
-      setAccounts(
-        accounts.map((account) =>
-          account.account_number === accountNumber
-            ? { ...account, show_to_users: 0 }
-            : account
-        )
-      );
+      // Trigger re-fetch by toggling refreshTrigger state
+      setRefreshTrigger((prev) => !prev);
     } catch (error) {
       console.error("Error hiding account:", error);
     }
