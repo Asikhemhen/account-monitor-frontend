@@ -64,7 +64,7 @@ const AddUserPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white px-6 mt-16">
+    <div className="flex justify-center items-center h-screen bg-white px-6 mt-16 pt-4 ml-20 pb-16">
       <div className="bg-white p-8 border rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-extrabold text-blue-900 text-center mb-6">
           {t("addUserPage.title")}
