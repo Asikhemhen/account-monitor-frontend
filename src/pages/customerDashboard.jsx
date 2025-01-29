@@ -7,12 +7,13 @@ import lastWeekProfit from "../assets/images/graph-up.svg";
 import todaysProfit from "../assets/images/graph-flat.svg";
 import totalProfit from "../assets/images/trophy.svg";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 
 const CustomerDashboard = () => {
   const { data, loading, error } = useAuth();
   const { t, i18n } = useTranslation();
+  const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
   const sumProperty = (array, key) => {
     const sum = array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
@@ -35,8 +36,6 @@ const CustomerDashboard = () => {
     );
   }
 
-  const visibleAccounts = data.filter((account) => account.show_to_users === 1);
-
   const formattedDate = (date_convert) => {
     const isoDate = date_convert;
     const date = new Date(isoDate);
@@ -57,6 +56,13 @@ const CustomerDashboard = () => {
   };
 
   const visibleAccount = data.filter((account) => account.show_to_users === 1);
+
+  // Filter data based on search query (account name & number)
+  const filteredData = visibleAccount.filter(
+    (row) =>
+      row.account_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.account_number.toString().includes(searchQuery)
+  );
 
   return (
     <section className="flex flex-col pt-4 px-5 mt-28 ml-20 pb-16">
@@ -166,8 +172,8 @@ const CustomerDashboard = () => {
 
             {/* Table Body */}
             <tbody>
-              {visibleAccount.length > 0 ? (
-                visibleAccount.map((row, index) => (
+              {filteredData.length > 0 ? (
+                filteredData.map((row, index) => (
                   <tr
                     key={index}
                     className={`${
