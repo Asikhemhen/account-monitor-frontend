@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 const AdminDashboard = () => {
   const { t, i18n } = useTranslation();
   const { data, loading, error } = useAuth();
+  const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
   const sumProperty = (array, key) => {
     const sum = array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
@@ -53,6 +54,13 @@ const AdminDashboard = () => {
       String(date.getSeconds()).padStart(2, "0")
     );
   };
+
+  // Filter data based on search query (account name & number)
+  const filteredData = data.filter(
+    (row) =>
+      row.account_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.account_number.toString().includes(searchQuery)
+  );
 
   return (
     <section className="flex flex-col pt-4 px-5 mt-28 ml-20 pb-16">
@@ -116,6 +124,8 @@ const AdminDashboard = () => {
           <input
             type="text"
             placeholder={t("mainTable.searchPlaceholder")}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="h-7 w-40 bg-white border text-sm text-center px-2 border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
           />
         </div>
@@ -162,8 +172,8 @@ const AdminDashboard = () => {
 
             {/* Table Body */}
             <tbody>
-              {data.length > 0 ? (
-                data.map((row, index) => (
+              {filteredData.length > 0 ? (
+                filteredData.map((row, index) => (
                   <tr
                     key={index}
                     className={`${
