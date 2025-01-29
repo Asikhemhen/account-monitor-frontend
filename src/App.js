@@ -15,6 +15,7 @@ import AddUserPage from "./pages/addUserPage";
 import UsersPage from "./pages/usersPage";
 import SettingsPage from "./pages/settingsPage";
 import MainTable from "./components/main-table";
+import Settings from "./pages/settingsPage";
 
 // Protected Route to handle role-based access
 const ProtectedRoute = ({ children, role }) => {
@@ -40,6 +41,7 @@ const DefaultRoute = () => {
 const App = () => {
   return (
     <AuthProvider>
+      {/* <SettingsPage />/ */}
       <Router>
         <Routes>
           {/* Public Login Route */}

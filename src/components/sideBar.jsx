@@ -32,7 +32,7 @@ const SideBar = () => {
             </div>
           </Link>
           <img src={line} alt="line icon" className="w-10 py-1" />
-          {/* <Link to="/admin/settings">
+          <Link to="/admin/settings">
             <div
               className={`flex w-12 h-12 py-1 ${
                 location.pathname === "/admin/settings"
@@ -43,7 +43,7 @@ const SideBar = () => {
               <img src={settings} alt="settings icon" className="w-full p-3" />
             </div>
           </Link>
-          <img src={line} alt="line icon" className="w-10 py-1" /> */}
+          <img src={line} alt="line icon" className="w-10 py-1" />
           <Link to="/admin/users">
             <div
               className={`flex w-12 h-12 py-1 ${
