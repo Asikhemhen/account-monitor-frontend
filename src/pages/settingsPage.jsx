@@ -30,7 +30,7 @@ const SettingsPage = () => {
   const handleHideAccount = async (accountNumber) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/api/account_info/${accountNumber}`,
+        `${BASE_URL}/api/account_info/${accountNumber}/hide`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
