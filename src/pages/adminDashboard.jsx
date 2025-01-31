@@ -129,8 +129,8 @@ const AdminDashboard = () => {
             className="h-7 w-40 bg-white border text-sm text-center px-2 border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
           />
         </div>
-        <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide">
-          <table className="border-collapse w-full">
+        <div className="relative overflow-auto h-fit max-w-full px-5 scrollbar-hide">
+          <table className="border-collapse w-full pb-16">
             {/* Table Header */}
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
               <tr>
