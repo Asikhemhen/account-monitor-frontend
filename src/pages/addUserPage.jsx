@@ -17,7 +17,7 @@ const AddUserPage = () => {
     i18n.changeLanguage("pt"); // Set default language to Portuguese
   }, [i18n]); // The empty dependency array ensures this only runs once on mount
 
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const BASE_URL = "https://api.tokaipainel.com"; //process.env.REACT_APP_API_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;

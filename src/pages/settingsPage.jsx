@@ -10,7 +10,7 @@ const SettingsPage = () => {
   const [actionState, setActionState] = useState("");
   const [bgState, setBgState] = useState("");
 
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL; //
+  const BASE_URL = "https://api.tokaipainel.com"; //process.env.REACT_APP_API_BASE_URL; //
 
   useEffect(() => {
     i18n.changeLanguage("pt");
