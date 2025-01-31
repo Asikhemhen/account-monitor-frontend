@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "../AuthContext";
-import logo from "../assets/images/logo.png";
 import UserDetail from "./userDetails";
 import Logo from "./logo";
 
