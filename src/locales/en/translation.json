@@ -90,6 +90,12 @@
     "accountsDisplayed": "Seen by Users",
     "accountsHidden": "Hidden From Users",
     "hide": "Hide",
-    "show": "Show"
+    "show": "Show",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this account?",
+    "userNotFound": "Account not found",
+    "deleteFailed": "Failed to delete account",
+    "deleteSuccess": "Account deleted successfully",
+    "error": "Error"
   }
 }

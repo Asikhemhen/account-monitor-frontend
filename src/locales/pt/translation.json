@@ -90,6 +90,12 @@
     "accountsDisplayed": "Visto pelos usuários",
     "accountsHidden": "Oculto dos usuários",
     "hide": "Esconder",
-    "show": "Mostrar"
+    "show": "Mostrar",
+    "delete": "Excluir",
+    "confirmDelete": "Tem a certeza de que pretende eliminar esta conta?",
+    "userNotFound": "Conta não encontrada",
+    "deleteFailed": "Falha ao eliminar conta",
+    "deleteSuccess": "Conta eliminada com sucesso",
+    "error": "Erro"
   }
 }

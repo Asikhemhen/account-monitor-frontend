@@ -6,6 +6,10 @@ const SettingsPage = () => {
   const [visibleAccounts, setVisibleAccounts] = useState([]);
   const [hiddenAccounts, setHiddenAccounts] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(false); // Track updates
+
+  const [actionState, setActionState] = useState("");
+  const [bgState, setBgState] = useState("");
+
   const BASE_URL = "https://api.tokaipainel.com";
 
   useEffect(() => {
@@ -74,6 +78,40 @@ const SettingsPage = () => {
     }
   };
 
+  const handleDeleteAccount = async (account_number) => {
+    if (!window.confirm(t("settingsPage.confirmDelete"))) return;
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/account_info/${account_number}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          setActionState(t("settingsPage.userNotFound"));
+          setBgState("bg-red-200");
+        }
+        setActionState(t("settingsPage.deleteFailed"));
+        setBgState("bg-red-200");
+      }
+
+      setRefreshTrigger((prev) => !prev);
+      setActionState(t("settingsPage.deleteSuccess"));
+      setBgState("bg-green-200");
+
+      setTimeout(() => {
+        setActionState("");
+      }, 3000);
+    } catch (err) {
+      alert(t("settingsPage.error") + ": " + err.message);
+      setActionState(t("settingsPage.error") + ": " + err.message);
+      setBgState("bg-red-200");
+    }
+  };
+
   const formattedDate = (date_convert) => {
     const date = new Date(date_convert);
     return (
@@ -98,6 +136,9 @@ const SettingsPage = () => {
         <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5 pt-10">
           {t("settingsPage.accountsDisplayed")}
         </h1>
+        {actionState && (
+          <div className={`${bgState} ml-5 px-5 py-2`}>{actionState}</div>
+        )}
         <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide pb-10">
           <table className="border-collapse w-full">
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
@@ -149,10 +190,16 @@ const SettingsPage = () => {
                   >
                     <td className="px-2 py-2 border-y relative">
                       <button
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-sm text-white px-2 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-xs text-white px-1 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
                         onClick={() => handleHideAccount(row.account_number)}
                       >
                         {t("settingsPage.hide")}
+                      </button>
+                      <button
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-xs text-white px-1 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
+                        onClick={() => handleDeleteAccount(row.account_number)}
+                      >
+                        {t("settingsPage.delete")}
                       </button>
                     </td>
                     <td className="text-left px-2 py-2 border-y">
@@ -206,6 +253,9 @@ const SettingsPage = () => {
         <h1 className="text-blue-800 text-center sm:text-left text-2xl font-bold mb-4 px-5 pt-10">
           {t("settingsPage.accountsHidden")}
         </h1>
+        {actionState && (
+          <div className={`${bgState} ml-5 px-5 py-2`}>{actionState}</div>
+        )}
         <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide pb-10">
           <table className="border-collapse w-full">
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
@@ -257,10 +307,16 @@ const SettingsPage = () => {
                   >
                     <td className="px-2 py-2 border-y relative">
                       <button
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-800 h-7 text-sm text-white px-2 rounded hover:bg-blue-900 py-1 opacity-0 group-hover:opacity-100 transition"
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-800 h-7 text-xs text-white px-1 rounded hover:bg-blue-900 py-1 opacity-0 group-hover:opacity-100 transition"
                         onClick={() => handleShowAccount(row.account_number)}
                       >
                         {t("settingsPage.show")}
+                      </button>
+                      <button
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-800 h-7 text-xs text-white px-1 rounded hover:bg-red-900 py-1 opacity-0 group-hover:opacity-100 transition"
+                        onClick={() => handleDeleteAccount(row.account_number)}
+                      >
+                        {t("settingsPage.delete")}
                       </button>
                     </td>
                     <td className="text-left px-2 py-2 border-y">
