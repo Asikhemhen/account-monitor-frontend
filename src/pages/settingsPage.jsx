@@ -6,7 +6,7 @@ const SettingsPage = () => {
   const [visibleAccounts, setVisibleAccounts] = useState([]);
   const [hiddenAccounts, setHiddenAccounts] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(false); // Track updates
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const BASE_URL = "https://api.tokaipainel.com";
 
   useEffect(() => {
     i18n.changeLanguage("pt");

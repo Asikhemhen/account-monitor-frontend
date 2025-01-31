@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 // Create Authentication Context
 const AuthContext = createContext();
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = "https://api.tokaipainel.com";
 
 // Provide Authentication Context
 export const AuthProvider = ({ children }) => {

@@ -10,7 +10,7 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const BASE_URL = "https://api.tokaipainel.com";
 
   useEffect(() => {
     i18n.changeLanguage("pt"); // Set default language to Portuguese
@@ -18,8 +18,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("URL: ", process.env.REACT_APP_API_BASE_URL);
 
     // Replace with your actual backend URL
     const apiUrl = `${BASE_URL}/api/login`;

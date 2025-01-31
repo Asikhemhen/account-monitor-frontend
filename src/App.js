@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children, role }) => {
 const DefaultRoute = () => {
   const { isAuthenticated, userRole } = useAuth();
 
-  console.log(userRole, isAuthenticated);
+  // console.log(userRole, isAuthenticated);
 
   if (!isAuthenticated) return <Navigate to="/login" />;
   if (userRole === "admin") return <Navigate to="/admin/dashboard" />;
