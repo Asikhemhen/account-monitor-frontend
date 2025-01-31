@@ -9,11 +9,18 @@ import totalProfit from "../assets/images/trophy.svg";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
+import arrowUp from "../assets/images/arrowUp.svg";
+import arrowDown from "../assets/images/arrowDown.svg";
 
 const CustomerDashboard = () => {
   const { data, loading, error } = useAuth();
   const { t, i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [entries, setEntries] = useState(50);
+  const [sortConfig, setSortConfig] = useState({
+    key: "last_position_time",
+    direction: "asc",
+  }); // Sorting state
 
   const sumProperty = (array, key) => {
     const sum = array.reduce((sum, item) => sum + Number(item[key] || 0), 0);
@@ -36,6 +43,26 @@ const CustomerDashboard = () => {
     );
   }
 
+  const arrow = (type) => {
+    if (type === "up") {
+      return (
+        <img
+          src={arrowUp}
+          alt="Arrow Down"
+          className="min-h-3 max-h-3 max-w-3 min-w-3"
+        />
+      );
+    } else if (type === "down") {
+      return (
+        <img
+          src={arrowDown}
+          alt="Arrow Down"
+          className="min-h-3 max-h-3 max-w-3 min-w-3"
+        />
+      );
+    }
+  };
+
   const formattedDate = (date_convert) => {
     const isoDate = date_convert;
     const date = new Date(isoDate);
@@ -57,8 +84,29 @@ const CustomerDashboard = () => {
 
   const visibleAccount = data.filter((account) => account.show_to_users !== 0);
 
-  // Filter data based on search query (account name & number)
-  const filteredData = visibleAccount.filter(
+  // Sort function
+  const sortedData = [...visibleAccount].sort((a, b) => {
+    const aValue = a[sortConfig.key];
+    const bValue = b[sortConfig.key];
+
+    if (sortConfig.direction === "asc") {
+      return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+    } else {
+      return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
+    }
+  });
+
+  // Handle column header click to change sorting
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  // Filter data based on search query
+  const filteredData = sortedData.filter(
     (row) =>
       row.account_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       row.account_number.toString().includes(searchQuery)
@@ -118,8 +166,11 @@ const CustomerDashboard = () => {
           <div className="flex gap-1">
             <label>{t("mainTable.show")}</label>
             <input
-              type="text"
+              type="number"
+              min={1}
               className="text-sm text-center px-2 h-7 w-20 bg-white border border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
+              value={entries}
+              onChange={(e) => setEntries(e.target.value)}
             />
             <label>{t("mainTable.entries")}</label>
           </div>
@@ -131,43 +182,175 @@ const CustomerDashboard = () => {
             className="h-7 w-40 bg-white border text-sm text-center px-2 border-stone-200 rounded-md focus:ring-1 focus:ring-indigo-900 focus:outline-none"
           />
         </div>
-        <div className="relative overflow-auto max-h-96 max-w-full px-5 scrollbar-hide">
+        <div className="relative overflow-auto h-fit max-w-full px-5 scrollbar-hide pb-16">
           <table className="border-collapse w-full">
             {/* Table Header */}
             <thead className="sticky top-0 z-10 bg-white text-blue-800">
-              <tr>
-                <th className="min-w-30 px-2 py-2 text-left">
-                  {t("mainTable.tableHeaders.accountName")}
+              <tr className="">
+                <th
+                  className="min-w-30 px-2 py-2 text-left cursor-pointer"
+                  onClick={() => handleSort("account_name")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.accountName")}
+                    {sortConfig.key === "account_name" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.accountNumber")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("account_number")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.accountNumber")}
+                    {sortConfig.key === "account_number" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.balance")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("balance")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.balance")}
+                    {sortConfig.key === "balance" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.equity")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("equity")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.equity")}
+                    {sortConfig.key === "equity" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.totalWithdraw")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("total_withdraw")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.totalWithdraw")}
+                    {sortConfig.key === "total_withdraw" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.totalProfitDaily")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("total_profit_daily")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.totalProfitDaily")}
+                    {sortConfig.key === "total_profit_daily" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.totalProfitWeekly")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("total_profit_weekly")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.totalProfitWeekly")}
+                    {sortConfig.key === "total_profit_weekly" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.currentMonthsProfit")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("total_profit_monthly")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.currentMonthsProfit")}
+                    {sortConfig.key === "total_profit_monthly" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="max-w-24 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.currentOpenOrders")}
+                <th
+                  className="max-w-24 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("current_open_orders")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.currentOpenOrders")}
+                    {sortConfig.key === "current_open_orders" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="max-w-24 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.currentOpenLots")}
+                <th
+                  className="max-w-24 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("current_open_lots")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.currentOpenLots")}
+                    {sortConfig.key === "current_open_lots" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
-                <th className="min-w-30 px-2 py-2 text-center">
-                  {t("mainTable.tableHeaders.lastPositionTime")}
+                <th
+                  className="min-w-30 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleSort("last_position_time")}
+                >
+                  <div className="flex items-center">
+                    {t("mainTable.tableHeaders.lastPositionTime")}
+                    {sortConfig.key === "last_position_time" && (
+                      <span>
+                        {sortConfig.direction === "asc"
+                          ? arrow("down")
+                          : arrow("up")}
+                      </span>
+                    )}
+                  </div>
                 </th>
               </tr>
             </thead>
@@ -175,48 +358,51 @@ const CustomerDashboard = () => {
             {/* Table Body */}
             <tbody>
               {filteredData.length > 0 ? (
-                filteredData.map((row, index) => (
-                  <tr
-                    key={index}
-                    className={`${
-                      index % 2 === 0 ? "bg-stone-100" : "bg-white"
-                    } hover:bg-blue-50`}
-                  >
-                    <td className="text-left min-w-30 px-2 py-2 border-y">
-                      {row.account_name}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.account_number}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.balance}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.equity}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.total_withdraw}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.total_profit_daily}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.total_profit_weekly}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {row.monthly_profit}
-                    </td>
-                    <td className="text-center max-w-24 px-2 py-2 border-y">
-                      {row.current_open_orders}
-                    </td>
-                    <td className="text-center max-w-24 px-2 py-2 border-y">
-                      {row.current_open_lots}
-                    </td>
-                    <td className="text-center min-w-30 px-2 py-2 border-y">
-                      {formattedDate(row.last_position_time)}
-                    </td>
-                  </tr>
-                ))
+                filteredData.map(
+                  (row, index) =>
+                    index < entries && (
+                      <tr
+                        key={index}
+                        className={`${
+                          index % 2 === 0 ? "bg-stone-100" : "bg-white"
+                        } hover:bg-blue-50`}
+                      >
+                        <td className="text-left min-w-30 px-2 py-2 border-y">
+                          {row.account_name}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.account_number}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.balance}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.equity}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.total_withdraw}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.total_profit_daily}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.total_profit_weekly}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {row.monthly_profit}
+                        </td>
+                        <td className="text-center max-w-24 px-2 py-2 border-y">
+                          {row.current_open_orders}
+                        </td>
+                        <td className="text-center max-w-24 px-2 py-2 border-y">
+                          {row.current_open_lots}
+                        </td>
+                        <td className="text-center min-w-30 px-2 py-2 border-y">
+                          {formattedDate(row.last_position_time)}
+                        </td>
+                      </tr>
+                    )
+                )
               ) : (
                 <tr>
                   <td colSpan="11" className="text-center py-4">

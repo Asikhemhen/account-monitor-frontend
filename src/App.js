@@ -34,6 +34,7 @@ const DefaultRoute = () => {
 const App = () => {
   return (
     <AuthProvider>
+      <AdminDashboard />
       <BrowserRouter>
         <Routes>
           {/* Public Login Route */}
