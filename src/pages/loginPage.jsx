@@ -10,7 +10,7 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const BASE_URL = "https://api.tokaipainel.com";
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     i18n.changeLanguage("pt"); // Set default language to Portuguese

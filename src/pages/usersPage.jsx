@@ -8,7 +8,7 @@ const UsersPage = () => {
   const [error, setError] = useState(null);
   const [actionState, setActionState] = useState("");
   const [bgState, setBgState] = useState("");
-  const BASE_URL = "https://api.tokaipainel.com";
+  const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
