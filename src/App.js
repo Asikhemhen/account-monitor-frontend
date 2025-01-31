@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
 import "./styles/tailwind.css";
 import Layout from "./components/layout";
@@ -39,8 +34,7 @@ const DefaultRoute = () => {
 const App = () => {
   return (
     <AuthProvider>
-      {/* <SettingsPage /> */}
-      <Router>
+      <BrowserRouter>
         <Routes>
           {/* Public Login Route */}
           <Route path="/login" element={<LoginPage />} />
@@ -95,7 +89,7 @@ const App = () => {
           {/* Default Route */}
           <Route path="/" element={<DefaultRoute />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </AuthProvider>
   );
 };
