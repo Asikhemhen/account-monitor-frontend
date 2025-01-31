@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const MainTable = () => {
   const { t, i18n } = useTranslation(); // Initialize translation hook
-  const { data, loading, error, role } = useAuth();
+  const { data, loading, error } = useAuth();
 
   useEffect(() => {
     i18n.changeLanguage("pt"); // Set default language to Portuguese

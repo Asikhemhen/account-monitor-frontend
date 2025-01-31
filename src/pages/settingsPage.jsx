@@ -23,7 +23,9 @@ const SettingsPage = () => {
         setVisibleAccounts(
           data.filter((account) => account.show_to_users === 1)
         );
-        setHiddenAccounts(data.filter((account) => account.show_to_users != 1));
+        setHiddenAccounts(
+          data.filter((account) => account.show_to_users !== 1)
+        );
       } catch (error) {
         console.error("Error fetching accounts:", error);
       }

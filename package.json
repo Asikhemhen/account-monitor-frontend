@@ -49,5 +49,8 @@
     ]
   },
   "homepage": "https://Asikhemhen.github.io/account-monitor-frontend",
-  "proxy": "https://account-monitor-production.up.railway.app"
+  "proxy": "https://account-monitor-production.up.railway.app",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }
