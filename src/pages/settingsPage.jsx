@@ -21,10 +21,10 @@ const SettingsPage = () => {
 
         // Separate visible and hidden accounts
         setVisibleAccounts(
-          data.filter((account) => account.show_to_users === 1)
+          data.filter((account) => account.show_to_users !== 0)
         );
         setHiddenAccounts(
-          data.filter((account) => account.show_to_users !== 1)
+          data.filter((account) => account.show_to_users === 0)
         );
       } catch (error) {
         console.error("Error fetching accounts:", error);

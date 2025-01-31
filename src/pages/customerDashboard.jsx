@@ -55,7 +55,7 @@ const CustomerDashboard = () => {
     );
   };
 
-  const visibleAccount = data.filter((account) => account.show_to_users === 1);
+  const visibleAccount = data.filter((account) => account.show_to_users !== 0);
 
   // Filter data based on search query (account name & number)
   const filteredData = visibleAccount.filter(
