@@ -13,7 +13,7 @@ import arrowUp from "../assets/images/arrowUp.svg";
 import arrowDown from "../assets/images/arrowDown.svg";
 
 const CustomerDashboard = () => {
-  const { data, loading, error } = useAuth();
+  const { data, loading, error, fetchData } = useAuth();
   const { t, i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
   const [entries, setEntries] = useState(50);
@@ -30,6 +30,14 @@ const CustomerDashboard = () => {
   useEffect(() => {
     i18n.changeLanguage("pt"); // Set default language to Portuguese
   }, [i18n]); // The empty dependency array ensures this only runs once on mount
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchData(); // Fetch fresh data every minute
+    }, 60000);
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, [fetchData]); // Depend on fetchData to avoid issues with stale closures
 
   if (loading) {
     return <div>{t("loading")}</div>;

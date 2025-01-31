@@ -28,22 +28,24 @@ export const AuthProvider = ({ children }) => {
   }, [isAuthenticated, userRole, firstname]);
 
   // Fetch account data when authenticated
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/account_info`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const result = await response.json();
+      setData(result); // Store account data
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  // Fetch account data when authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`${BASE_URL}/api/account_info`);
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
-          }
-          const result = await response.json();
-          setData(result); // Store account data
-          setLoading(false);
-        } catch (err) {
-          setError(err.message);
-          setLoading(false);
-        }
-      };
       fetchData();
     }
   }, [isAuthenticated]);
@@ -77,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         error,
         login,
         logout,
+        fetchData,
       }}
     >
       {children}
