@@ -33,8 +33,8 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchData(); // Fetch fresh data every minute
-    }, 60000);
+      fetchData(); // Fetch fresh data every 5 secs
+    }, 5000);
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [fetchData]); // Depend on fetchData to avoid issues with stale closures

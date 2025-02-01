@@ -34,7 +34,7 @@ const CustomerDashboard = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       fetchData(); // Fetch fresh data every minute
-    }, 60000);
+    }, 5000);
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, [fetchData]); // Depend on fetchData to avoid issues with stale closures
