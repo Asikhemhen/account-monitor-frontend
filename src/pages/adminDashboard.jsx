@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    i18n.changeLanguage("pt"); // Set default language to Portuguese
+    i18n.changeLanguage("en"); // Set default language to Portuguese
   }, [i18n]); // The empty dependency array ensures this only runs once on mount
 
   useEffect(() => {
@@ -159,7 +159,7 @@ const AdminDashboard = () => {
         />
         <Card
           title={t("adminDashboard.totalProfit")}
-          value={sumProperty(data, "total_profit_daily")}
+          value={sumProperty(data, "current_pnl")} //current_pnl is total profit from the EA
           img={totalProfit}
           bg={"bg-green-600"}
         />

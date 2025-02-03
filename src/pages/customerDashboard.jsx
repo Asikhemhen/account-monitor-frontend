@@ -33,7 +33,7 @@ const CustomerDashboard = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchData(); // Fetch fresh data every minute
+      fetchData(); // Fetch fresh data every 5 secs
     }, 5000);
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
@@ -161,7 +161,7 @@ const CustomerDashboard = () => {
         />
         <Card
           title={t("adminDashboard.totalProfit")}
-          value={sumProperty(visibleAccount, "total_profit_daily")}
+          value={sumProperty(visibleAccount, "current_pnl")}
           img={totalProfit}
           bg={"bg-green-600"}
         />
